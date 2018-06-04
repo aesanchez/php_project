@@ -18,7 +18,7 @@
     ?>
 
     <nav class="navbar navbar-dark bg-dark navbar-expand-sm mb-3">
-        <a class="navbar-brand" href="/php_project">Biblioteca UNLP</a>
+        <a class="navbar-brand" href="/">Biblioteca UNLP</a>
 
         <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
             aria-controls="navbar">
