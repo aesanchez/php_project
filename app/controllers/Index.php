@@ -36,7 +36,7 @@
                 $row['nombre_autor'] = $this->authorModel->getName($row['autores_id']);                
             }
             //pages total
-            $pageTotal = intdiv($this->bookModel->getTotal($authorFilter, $titleFilter, $this->pageAmount),$this->pageAmount) + 1; 
+            $pageTotal = ceil($this->bookModel->getTotal($authorFilter, $titleFilter, $this->pageAmount) / $this->pageAmount); 
 
             //paramentros para la vista
             $params = [

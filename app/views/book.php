@@ -31,7 +31,7 @@
                         <i class="far fa-edit"></i> Registrarse</a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="<?php echo URL_PATH?>/login" class="nav-link">
                         <i class="far fa-user"></i> Iniciar Sesion</a>
                 </li>
             </ul>

@@ -28,7 +28,7 @@
                         <i class="far fa-edit"></i> Registrarse</a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="<?php echo URL_PATH?>/login" class="nav-link">
                         <i class="far fa-user"></i> Iniciar Sesion</a>
                 </li>
             </ul>
@@ -104,6 +104,7 @@
                 </table>
                 <div class="text-center">
                     <?php
+                        //paginacion
                         $aux = 0;
                         while($aux < $params['pages']){
                             if($aux+1 == $params['current_page']){
