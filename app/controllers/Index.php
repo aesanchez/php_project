@@ -6,6 +6,7 @@
         public function __construct(){
             $this->bookModel = $this->model('BookModel');
             $this->authorModel = $this->model('AuthorModel');
+            $this->opModel = $this->model('OperationModel');
         }
 
         public function index(){
@@ -34,6 +35,13 @@
             //agregar una columna con el nombre y apellido del autor
             foreach ($books as &$row) {
                 $row['nombre_autor'] = $this->authorModel->getName($row['autores_id']);                
+            }
+
+            //agregar columnas con numero de prestados y reservados
+            foreach ($books as &$row) {
+                $aux = $this->opModel->getStateTotalByBookID($row['id']);
+                $row['reservados'] = $aux['reservado'];
+                $row['prestados'] = $aux['prestado'];    
             }
             //pages total
             $pageTotal = ceil($this->bookModel->getTotal($authorFilter, $titleFilter, $this->pageAmount) / $this->pageAmount); 

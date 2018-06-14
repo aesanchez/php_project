@@ -96,7 +96,11 @@
                                 echo "<td><a href=\"" . URL_PATH . "/book/display/" . $row["id"] . "\"><img src=\"" . URL_PATH . "/book/photo/" . $row["id"] . "\" style='height: 10em'></a></td>";
                                 echo "<td><a href=\"" . URL_PATH . "/book/display/" . $row["id"] . "\">" . $row["titulo"] ."</a></td>";
                                 echo "<td><a href=\"" . URL_PATH . "/author/display/" . $row["autores_id"] . "\">" . $row["nombre_autor"] ."</a></td>";
-                                echo "<td>" . $row["cantidad"] ."</td>";
+                                echo "<td>";
+                                echo "Total: " . $row['cantidad'] . "</br>";
+                                echo "Prestados: " . $row['prestados'] . "</br>";
+                                echo "Reservados: " . $row['reservados'] . "</br>";
+                                echo "</td>";
                                 echo "</tr>";
                             }
                         ?>
