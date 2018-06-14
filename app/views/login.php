@@ -31,7 +31,14 @@
     </nav>
 
     <div class="container">
-
+        <?php
+            if(isset($params['authentication'])){
+                echo "<div class='row'><div class='col'><div class='alert alert-danger alert-dismisable fade show' role='alert'>
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                <span aria-hidden='true'>&times;</span></button>
+                <strong>ERROR!</strong> <p> Email o contrasenia incorrectos </p></div></div></div>";
+            }
+        ?>
         <!-- Registro-->
         <div class="row justify-content-center">
             <div class="col col-lg-8 col-md-8">
@@ -40,7 +47,7 @@
                         Iniciar Sesion
                     </div>
                     <div class="card-body">
-                        <form action="index.php" method="post">
+                        <form action="<?php echo URL_PATH?>/login" method="post">
                             <div class="form-group">
                                 <label>Email</label>
                                 <input type="email" class="form-control" name="email" placeholder="Ingrese su email..." required>

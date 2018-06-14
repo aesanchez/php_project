@@ -7,29 +7,25 @@
         }
 
         public function index(){
-            $this->view('login');
+            $params = [];
+            //chequeo si se hizo un intento de login
+            if(!empty($_POST)){
+                if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['password']) && !empty($_POST['password']) ){
+                    //validar en la base de datos
+                    if($this->userModel->validateUser($_POST['email'], $_POST['password'])){
+                        //si esta bien re redirecciona al index
+                        header("Location: " . URL_PATH, true, 301);
+                        exit();
+                    }else{
+                        //Email o contrasenia incorrectos
+                        $params = [
+                            'authentication' => false
+                        ];               
+                    }
+                }
+            }
+            $this->view('login', $params);
         }
     }
-    
-    
-    // //chequeo si se hizo post
-    // if(!empty($_POST)){
-    //     if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['password']) && !empty($_POST['password']) ){
-    //         //Tengo emial y password
-    //         require_once("db.php");
-    //         //chequear existencia en la db
-    //         $conn = connect_db();
-    //         $result = mysqli_query($conn, "SELECT email FROM usuarios WHERE email='" . $_POST['email'] . "'");
-    //         if(0 == mysqli_num_rows($result))
-    //             echo "No existe el email en la base de datos";
-    //         else{
-    //             //chequear la contrasenia
-    //             $result = mysqli_query($conn, "SELECT clave FROM usuarios WHERE email='" . $_POST['email'] . "'");
-    //         }
-    //         mysqli_close($conn);  
-    //     }else{
-    //         //error
-    //     }
-    // }
 
 ?>
