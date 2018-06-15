@@ -12,10 +12,7 @@
 </head>
 
 <body>
-    <?php 
-        //require_once("../controllers/book_controller.php");
-    ?>
-
+    
     <nav class="navbar navbar-dark bg-dark navbar-expand-sm mb-3">
         <a class="navbar-brand" href='<?php echo URL_PATH;?>'>Biblioteca UNLP</a>
 
@@ -23,9 +20,21 @@
             aria-controls="navbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="navbar-collapse collapse justify-content-end" id="navbar">
-        <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav">
+        <?php
+            $session = new Session;
+            if($session->is_logged()){
+        ?>
+                <li class="nav-item">
+                    <a href="<?php echo URL_PATH?>/user" class="nav-link">
+                        <i class="far fa-user"></i> Mi perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo URL_PATH?>/login/logout" class="nav-link">
+                        <i class="far fa-times-circle"></i> Salir</a>
+                </li>
+        <?php }else{?>
                 <li class="nav-item">
                     <a href="<?php echo URL_PATH?>/register" class="nav-link">
                         <i class="far fa-edit"></i> Registrarse</a>
@@ -34,10 +43,11 @@
                     <a href="<?php echo URL_PATH?>/login" class="nav-link">
                         <i class="far fa-user"></i> Iniciar Sesion</a>
                 </li>
+        <?php } ?>
             </ul>
         </div>
     </nav>
-
+    
     <div class="container">
         <!-- Info del libro-->
         <div class="row">

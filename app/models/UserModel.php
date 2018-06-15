@@ -10,6 +10,10 @@
             return ($this->db->query("SELECT * FROM usuarios WHERE id=$id"))[0];
         }
 
+        public function getID($email){
+            return ($this->db->query("SELECT id FROM usuarios WHERE email='$email'"))[0]['id'];
+        }
+
         public function checkEmail($email){
             if(count($this->db->query("SELECT * FROM usuarios WHERE email='$email'"))==0)
                 return false;

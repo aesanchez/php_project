@@ -6,8 +6,10 @@
             $this->userModel = $this->model('UserModel');
         }
 
-        public function display($id){
-            //
+        public function index(){
+            //mostrar al usuario que esta logueado en el momento
+            //caso contrario volver al index
+            $this->view('user');             
         }
 
         public function photo($id){

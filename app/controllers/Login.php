@@ -13,7 +13,10 @@
                 if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['password']) && !empty($_POST['password']) ){
                     //validar en la base de datos
                     if($this->userModel->validateUser($_POST['email'], $_POST['password'])){
-                        //si esta bien re redirecciona al index
+                        //iniciar sesion
+                        $session = new Session;
+                        $session->log_in($this->userModel->getID($_POST['email']));
+                        //Se redireccion al index
                         header("Location: " . URL_PATH, true, 301);
                         exit();
                     }else{
@@ -25,6 +28,13 @@
                 }
             }
             $this->view('login', $params);
+        }
+
+        public function logout(){
+            $session = new Session;
+            $session->log_out();
+            header("Location: " . URL_PATH, true, 301);
+            exit();
         }
     }
 
