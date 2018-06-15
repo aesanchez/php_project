@@ -30,7 +30,9 @@
 
         public function getPhoto($id){
             $result = $this->db->query("SELECT foto FROM usuarios WHERE id=$id");
-            $row = $result[0]   ;
+            if(empty($result))
+                return NULL;
+            $row = $result[0];
             return $row['foto'];
         }
 

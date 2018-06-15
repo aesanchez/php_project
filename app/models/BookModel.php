@@ -55,7 +55,9 @@
 
         public function getPhoto($id){
             $result = $this->db->query("SELECT portada FROM libros WHERE id=$id");
-            $row = $result[0]   ;
+            if(empty($result))
+                return NULL;
+            $row = $result[0];
             return $row['portada'];
         }
     }
