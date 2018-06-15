@@ -13,7 +13,7 @@
         $subFolder = "/nombreCarpetaProyecto";
     */
    
-    $subFolder = "/mvc";
+    $subFolder = "/php_project";
 
     define('URL_PATH', $server . $subFolder);
 ?>
