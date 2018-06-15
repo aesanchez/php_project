@@ -36,13 +36,13 @@
     </nav>
 
     <div class="container">
-
+        
         <!-- Busqueda-->
         <div class="row mb-3">
-            <div class="col-4" style="display: flex;flex-direction: column;justify-content: center">
-                    <img src="<?php echo URL_PATH;?>/img/logo-info.png" style="width: 100%; height: auto;"/>
+            <div class="col-4 d-none d-md-block" style="position: relative;">
+                    <img src="<?php echo URL_PATH;?>/img/logo-info.png" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;width: 85%;height: auto;margin: auto;"/>
             </div>
-            <div class="col-8">
+            <div class="col">
                 <div class="card">
                     <div class="card-header">
                         Refinar busqueda
@@ -80,6 +80,7 @@
                         echo "</p>";
                     }
                 ?>
+                <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead class="thead-dark">
                         <tr>
@@ -106,6 +107,7 @@
                         ?>
                     </tbody>
                 </table>
+                </div>
                 <div class="text-center">
                     <?php
                         //paginacion
