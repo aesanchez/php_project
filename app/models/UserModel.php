@@ -7,7 +7,7 @@
         }
         
         public function getUser($id){
-            return ($this->db->query("SELECT * FROM usuarios WHERE id=$id"))[0];
+            return ($this->db->query("SELECT nombre, apellido, email FROM usuarios WHERE id=$id"))[0];
         }
 
         public function getID($email){

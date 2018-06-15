@@ -24,7 +24,7 @@
             </div>
             <div class="col">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header text-white bg-dark">
                         Refinar busqueda
                     </div>
                     <div class="card-body">
