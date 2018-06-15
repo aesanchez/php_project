@@ -23,7 +23,7 @@
         <div class="navbar-collapse collapse justify-content-end" id="navbar">
         <ul class="nav navbar-nav">
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="<?php echo URL_PATH?>/register" class="nav-link">
                         <i class="far fa-user"></i> Registrarse</a>
                 </li>
             </ul>

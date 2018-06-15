@@ -20,6 +20,12 @@
             return true;
         }
 
+        public function getName($id){
+            $result = $this->db->query("SELECT nombre, apellido FROM usuarios WHERE id=$id");
+            $row = $result[0];
+            return $row['nombre'] . " " . $row['apellido'];
+        }
+
         public function addUser($email, $name, $lastname, $password, $img){
             $query = "INSERT INTO usuarios (id, email, nombre, apellido, clave, rol, foto) VALUES 
             (NULL, 

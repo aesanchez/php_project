@@ -18,9 +18,28 @@
             }
             $params = [
                 'nombre' => $this->authorModel->getName($id),
-                'books' => $books
+                'books' => $books,
+                'userInfo' => $this->sessionInfo()
             ];
             $this->view('author',$params);
+        }
+
+        private function sessionInfo(){
+            $userInfo = [
+                'logged' => false,
+                'id' => "",
+                'name' => ""
+            ];
+
+            $session = new Session;
+            if($session->is_logged()){
+                $userInfo['logged'] = true;
+                $userInfo['id'] = $session->getID();
+                $userModel = $this->model('UserModel');
+                $userInfo['name'] = $userModel->getName($session->getID());
+            }
+
+            return $userInfo;
         }
     }
     

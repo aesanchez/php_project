@@ -52,9 +52,28 @@
                 'author_filter' => $authorFilter,
                 'title_filter' => $titleFilter,
                 'current_page' => $page_number,
-                'pages' => $pageTotal
+                'pages' => $pageTotal,
+                'userInfo' => $this->sessionInfo()
             ];
             $this->view('index',$params);
+        }
+
+        private function sessionInfo(){
+            $userInfo = [
+                'logged' => false,
+                'id' => "",
+                'name' => ""
+            ];
+
+            $session = new Session;
+            if($session->is_logged()){
+                $userInfo['logged'] = true;
+                $userInfo['id'] = $session->getID();
+                $userModel = $this->model('UserModel');
+                $userInfo['name'] = $userModel->getName($session->getID());
+            }
+
+            return $userInfo;
         }
 
     }
