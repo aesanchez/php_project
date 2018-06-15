@@ -6,5 +6,14 @@
     define('DB_NAME', 'mysql');
 
     //config ruta "url global"
-    define('URL_PATH', 'http://localhost/mvc');
+    $server = "http://$_SERVER[HTTP_HOST]";
+    /*
+        cambiar este valor al nombre de la carpeta del projecto dentro de el directorio "htdocs"
+        Por ejemplo si tengo .../htdocs/nombreCarpetaProyecto/...
+        $subFolder = "/nombreCarpetaProyecto";
+    */
+   
+    $subFolder = "/mvc";
+
+    define('URL_PATH', $server . $subFolder);
 ?>
