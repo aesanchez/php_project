@@ -3,6 +3,12 @@
     class Login extends Controller{
 
         public function __construct(){
+            $session = new Session;
+            if($session->is_logged()){
+                // no deberia porque poder acceder aca si es que esta logueado
+                header("Location: ". URL_PATH,true, 301);
+                exit();
+            }
             $this->userModel = $this->model('UserModel');
         }
 
@@ -29,13 +35,7 @@
             }
             $this->view('login', $params);
         }
-
-        public function logout(){
-            $session = new Session;
-            $session->log_out();
-            header("Location: " . URL_PATH, true, 301);
-            exit();
-        }
+        
     }
 
 ?>

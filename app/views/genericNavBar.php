@@ -17,7 +17,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?php echo URL_PATH?>/login/logout" class="nav-link">
+                    <a href="<?php echo URL_PATH?>/user/logout" class="nav-link">
                         <i class="far fa-times-circle"></i> Salir</a>
                 </li>
         <?php }else{?>

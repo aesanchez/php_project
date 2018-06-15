@@ -3,6 +3,12 @@
     class Register extends Controller{
 
         public function __construct(){
+            $session = new Session;
+            if($session->is_logged()){
+                // no deberia porque poder acceder aca si es que esta logueado
+                header("Location: ". URL_PATH,true, 301);
+                exit();
+            }
             $this->userModel = $this->model('UserModel');
         }
 

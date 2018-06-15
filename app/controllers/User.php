@@ -17,6 +17,13 @@
             header("Content-type: jpeg");
             echo $photo;
         }
+
+        public function logout(){
+            $session = new Session;
+            $session->log_out();
+            header("Location: " . URL_PATH, true, 301);
+            exit();
+        }
     }
     
 ?>
