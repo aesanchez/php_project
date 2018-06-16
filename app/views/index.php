@@ -68,7 +68,7 @@
                             <th scope="col">Titulo</th>
                             <th scope="col">Autor</th>
                             <th scope="col">Ejemplares</th>
-                            <?php if($params['userInfo']['logged']){?>
+                            <?php if($params['userInfo']['logged'] && !$params['userInfo']['admin']){?>
                             <th scope="col">Accion</th>
                             <?php } ?>
                         </tr>
@@ -85,7 +85,7 @@
                                 echo "Prestados: " . $row['prestados'] . "</br>";
                                 echo "Reservados: " . $row['reservados'] . "</br>";
                                 echo "</td>";
-                                if($params['userInfo']['logged']){
+                                if($params['userInfo']['logged'] && !$params['userInfo']['admin']){
                                     echo "<td>";
                                     if($row['reservar']){//puedo reservar
                                         echo "<form method='get' action='" . URL_PATH . "" . "' style='display: inline'>";
