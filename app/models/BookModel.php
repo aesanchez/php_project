@@ -18,8 +18,8 @@
             }else if(!is_null($authorFilter)){
                     $query = $query . " INNER JOIN autores a ON l.autores_id = a.id AND (a.nombre LIKE '%" . $authorFilter . "%' OR a.apellido LIKE '%" . $authorFilter . "%')";
             }
-            //criterio de orden
-            //TODO
+            //criterio de orden TODO
+            $query = $query . " ORDER BY l.titulo";
             //Limite
             $query = $query . " LIMIT $limit";
             //mostrar dependiendo que pagina es
