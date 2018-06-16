@@ -53,12 +53,25 @@
             $this->db->queryAdd("UPDATE operaciones SET ultimo_estado = 'DEVUELTO', fecha_ultima_modificacion = CURRENT_DATE() WHERE operaciones.id = $id;");
         }
 
-        public function getListForAdmin(){
-            return $this->db->query("
+        public function getListForAdmin($filters){
+            $query = "
             SELECT o.id, l.titulo, a.nombre as a_nombre, a.apellido as a_apellido, u.nombre as u_nombre, u.apellido as u_apellido, o.ultimo_estado, o.fecha_ultima_modificacion 
             FROM operaciones o INNER JOIN libros l ON o.libros_id = l.id 
             INNER JOIN usuarios u ON o.lector_id = u.id
-            INNER JOIN autores a ON a.id = l.autores_id");
+            INNER JOIN autores a ON a.id = l.autores_id";
+            if(!empty($filters)){
+                if(isset($filters['author']))
+                    $query = $query . " AND (a.nombre LIKE '%" . $filters['author'] . "%' OR a.apellido LIKE '%" . $filters['author'] . "%')";
+                if(isset($filters['title']))
+                    $query = $query . " AND l.titulo LIKE '%" . $filters['title'] . "%'";
+                if(isset($filters['user']))
+                    $query = $query . " AND (u.nombre LIKE '%" . $filters['user'] . "%' OR u.apellido LIKE '%" . $filters['user'] . "%')";
+                if(isset($filters['date_from']))
+                    $query = $query . " AND o.fecha_ultima_modificacion >= '$filters[date_from]'";
+                if(isset($filters['date_until']))
+                    $query = $query . " AND o.fecha_ultima_modificacion <= '$filters[date_until]'";
+            }  
+            return $this->db->query($query);
         }
 
         public function isAvailable($book_id, $user_id){

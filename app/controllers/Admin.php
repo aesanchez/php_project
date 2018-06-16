@@ -14,10 +14,28 @@
         }
 
         public function index(){
+            $filters = [];
+            if(isset($_POST['author']) && !empty($_POST['author'])){
+                $filters['author'] = $_POST['author'];
+            }
+            if(isset($_POST['title']) && !empty($_POST['title'])){
+                $filters['title'] = $_POST['title'];
+            }
+            if(isset($_POST['user']) && !empty($_POST['user'])){
+                $filters['user'] = $_POST['user'];
+            }
+            if(isset($_POST['date_from']) && !empty($_POST['date_from'])){
+                $filters['date_from'] = $_POST['date_from'];
+            }
+            if(isset($_POST['date_until']) && !empty($_POST['date_until'])){
+                $filters['date_until'] = $_POST['date_until'];
+            }
+
 
             $params = [
                 'userInfo' => $this->sessionInfo(),
-                'list' => $this->opModel->getListForAdmin()
+                'list' => $this->opModel->getListForAdmin($filters),
+                'filters' => $filters
             ];
 
             $this->view('admin', $params);             

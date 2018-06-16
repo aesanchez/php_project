@@ -28,7 +28,7 @@
                         Refinar busqueda
                     </div>
                     <div class="card-body">
-                        <form action="<?php echo URL_PATH;?>/" method="post">
+                        <form action="<?php echo URL_PATH;?>/admin" method="post" name="search_form" onsubmit="return validateForm()">
                             <div class="form-group row">
                                 <label class="col-3">Titulo</label>
                                 <input type="text" class="form-control col-9" name="title" placeholder="Ingrese el titulo aqui...">
@@ -43,11 +43,11 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-3">Fecha desde</label>
-                                <input type="date" class="form-control col-9" name="date_from">
+                                <input type="date" class="form-control col-9" max=<?php echo date('Y-m-d');?> name="date_from">
                             </div>
                             <div class="form-group row">
                                 <label class="col-3">Fecha hasta</label>
-                                <input type="date" class="form-control col-9" name="date_until">
+                                <input type="date" class="form-control col-9" max=<?php echo date('Y-m-d');?> name="date_until">
                             </div>
                             <div align="right">
                                 <button type="submit" class="btn btn-primary">Buscar</button>
@@ -64,15 +64,34 @@
                 <h2 class="text-center">Operaciones</h2>
                 <?php
                     //filtros
+                    if(!empty($params['filters'])){
+                        echo "
+                        <div class='row justify-content-center'>
+                            <div class='col-4'>
+                                <div class='alert alert-warning alert-dismisable fade show' role='alert'>
+                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span></button>
+                                    <strong>Busqueda filtrada por:</strong><br>
+                                    <p><small>";
+                                    
+                        if(isset($params['filters']['author']))
+                            echo "Autor: " . $params['filters']['author'] . "<br>";
+                        if(isset($params['filters']['title']))
+                            echo "Titulo: " . $params['filters']['title'] . "<br>";
+                        if(isset($params['filters']['user']))
+                            echo "Lector: " . $params['filters']['user'] . "<br>";     
+                        if(isset($params['filters']['date_from']))
+                            echo "Fecha desde: " . $params['filters']['date_from'] . "<br>";     
+                        if(isset($params['filters']['date_until']))
+                            echo "Fecha hasta: " . $params['filters']['date_until'] . "<br>";     
+                        echo "</p>";
 
-                    // if(!is_null($params['author_filter']) || !is_null($params['title_filter'])){
-                    //     echo "<p style='text-align: center'><small>Busqueda filtrada por:</small><br>";
-                    //     if(!is_null($params['title_filter']))
-                    //         echo "<small>Titulo: " . $params['title_filter'] . "</small><br>";
-                    //     if(!is_null($params['author_filter']))
-                    //         echo "<small>Autor: " . $params['author_filter'] . "</small><br>";                        
-                    //     echo "</p>";
-                    // }
+                        echo "
+                                </small></p>
+                                </div>
+                            </div>
+                        </div>";
+                    }
                 ?>
                 <div class="table-responsive">
                 <table class="table table-bordered">
@@ -119,6 +138,22 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function validateForm() {
+            var from = document.forms["search_form"]["date_from"].value;
+            var until = document.forms["search_form"]["date_until"].value;
+            if(from != "" && until != ""){
+                //comprobar que no se superpongan
+                var date_from = new Date(from);
+                var date_until = new Date(until);
+                if(date_from.getTime() > date_until.getTime()){
+                    alert('La fecha "desde" debe ser menor o igual "hasta"');
+                    return false;
+                }
+            }                    
+        }
+        </script>
 
     <!-- Bootstrap -->
     <script src='<?php echo URL_PATH;?>/js/jquery.min.js' type='text/javascript'></script>
