@@ -88,29 +88,30 @@
                     </thead>
                     <tbody>
                         <?php
-                            // foreach($params['books'] as $row){
-                            //     echo "<tr>";
-                            //     echo "<td><a href=\"" . URL_PATH . "/book/display/" . $row["id"] . "\"><img src=\"" . URL_PATH . "/book/photo/" . $row["id"] . "\" style='height: 10em'></a></td>";
-                            //     echo "<td><a href=\"" . URL_PATH . "/book/display/" . $row["id"] . "\">" . $row["titulo"] ."</a></td>";
-                            //     echo "<td><a href=\"" . URL_PATH . "/author/display/" . $row["autores_id"] . "\">" . $row["nombre_autor"] ."</a></td>";
-                            //     echo "<td>";
-                            //     echo "Total: " . $row['cantidad'] . "</br>";
-                            //     echo "Prestados: " . $row['prestados'] . "</br>";
-                            //     echo "Reservados: " . $row['reservados'] . "</br>";
-                            //     echo "</td>";
-                            //     if($params['userInfo']['logged']){
-                            //         echo "<td>";
-                            //         if($row['reservar']){//puedo reservar
-                            //             echo "<form method='get' action='" . URL_PATH . "" . "' style='display: inline'>";
-                            //             echo "<input type='hidden' name='book_id' value=" . $row['id'] . ">";
-                            //             echo "<button type='submit' class='btn btn-success'>";
-                            //             echo "Reservar";
-                            //             echo "</button></form>";
-                            //         }
-                            //         echo "</td>";
-                            //     }
-                            //     echo "</tr>";
-                            // }
+                            foreach($params['list'] as $row){
+                                echo "<tr>";
+                                echo "<td>" . $row['titulo'] . "</td>";
+                                echo "<td>" . $row['a_nombre'] . " " . $row['a_apellido'] ."</td>";
+                                echo "<td>" . $row['u_nombre'] . " " . $row['u_apellido'] ."</td>";
+                                echo "<td>" . $row['ultimo_estado'] . "</td>";
+                                echo "<td>" . $row['fecha_ultima_modificacion'] . "</td>";
+                                echo "<td>";
+                                if(strcmp($row['ultimo_estado'], "RESERVADO") == 0){
+                                    echo "<form method='get' action='" . URL_PATH . "" . "' style='display: inline'>";
+                                    echo "<input type='hidden' name='' value=" . "" . ">";
+                                    echo "<button type='submit' class='btn btn-success'>";
+                                    echo "Prestar";
+                                    echo "</button></form>";
+                                }else if(strcmp($row['ultimo_estado'], "PRESTADO") == 0){
+                                    echo "<form method='get' action='" . URL_PATH . "" . "' style='display: inline'>";
+                                    echo "<input type='hidden' name='' value=" . "" . ">";
+                                    echo "<button type='submit' class='btn btn-info'>";
+                                    echo "Devolver";
+                                    echo "</button></form>";
+                                }
+                                echo "</td>";
+                                echo "</tr>";
+                            }
                         ?>
                     </tbody>
                 </table>

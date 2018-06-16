@@ -11,14 +11,13 @@
                 exit();
             }
             $this->opModel = $this->model('OperationModel');
-            $this->bookModel = $this->model('BookModel');
-            $this->authorModel = $this->model('AuthorModel');
         }
 
         public function index(){
 
             $params = [
-                'userInfo' => $this->sessionInfo()
+                'userInfo' => $this->sessionInfo(),
+                'list' => $this->opModel->getListForAdmin()
             ];
 
             $this->view('admin', $params);             
