@@ -7,20 +7,35 @@
         </button>
         <div class="navbar-collapse collapse justify-content-end" id="navbar">
             <ul class="nav navbar-nav">
-        <?php
+            <?php
             if($params['userInfo']['logged']){
-        ?>
+                if($params['userInfo']['admin']){
+            ?>
+                <li class="nav-item">                    
+                    <a href="<?php echo URL_PATH?>/admin" class="nav-link">
+                        <i class="fas fa-glasses"></i>
+                        Administrar
+                    </a>
+                </li>
+                <?php
+                }else{ 
+                ?>
                 <li class="nav-item">                    
                     <a href="<?php echo URL_PATH?>/user" class="nav-link">
                         <img src="<?php echo URL_PATH?>/user/photo/<?php echo $params['userInfo']['id']?>" alt="Avatar" style="height: 25px; width: 25px; border-radius: 50%;">
                         <?php echo $params['userInfo']['name'] ?>
                     </a>
                 </li>
+                <?php 
+                }
+                ?>
                 <li class="nav-item">
                     <a href="<?php echo URL_PATH?>/user/logout" class="nav-link">
                         <i class="far fa-times-circle"></i> Salir</a>
                 </li>
-        <?php }else{?>
+            <?php 
+            }else{ 
+            ?>
                 <li class="nav-item">
                     <a href="<?php echo URL_PATH?>/register" class="nav-link">
                         <i class="far fa-edit"></i> Registrarse</a>
@@ -29,7 +44,9 @@
                     <a href="<?php echo URL_PATH?>/login" class="nav-link">
                         <i class="far fa-user"></i> Iniciar Sesion</a>
                 </li>
-        <?php } ?>
+            <?php
+            }
+            ?>
             </ul>
         </div>
 </nav>

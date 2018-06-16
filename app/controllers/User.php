@@ -5,7 +5,7 @@
         public function __construct(){
             $this->session = new Session;
             if(!$this->session->is_logged()){
-                // no deberia porque poder acceder aca si es que esta logueado
+                // no deberia porque poder acceder aca si es que no se esta logueado
                 header("Location: ". URL_PATH,true, 301);
                 exit();
             }

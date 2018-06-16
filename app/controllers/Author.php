@@ -37,6 +37,7 @@
                 $userInfo['id'] = $session->getID();
                 $userModel = $this->model('UserModel');
                 $userInfo['name'] = $userModel->getName($session->getID());
+                $userInfo['admin'] = $userModel->isAdmin($session->getID());
             }
 
             return $userInfo;

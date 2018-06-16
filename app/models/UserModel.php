@@ -26,6 +26,12 @@
             return $row['nombre'] . " " . $row['apellido'];
         }
 
+        public function isAdmin($user_id){
+            if(strcmp(($this->db->query("SELECT rol FROM usuarios WHERE id=$user_id"))[0]['rol'], "BIBLIOTECARIO") == 0)
+                return true;
+            return false;
+        }
+
         public function addUser($email, $name, $lastname, $password, $img){
             $query = "INSERT INTO usuarios (id, email, nombre, apellido, clave, rol, foto) VALUES 
             (NULL, 
