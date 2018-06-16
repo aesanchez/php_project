@@ -88,7 +88,7 @@
                                 if($params['userInfo']['logged'] && !$params['userInfo']['admin']){
                                     echo "<td>";
                                     if($row['reservar']){//puedo reservar
-                                        echo "<form method='get' action='" . URL_PATH . "" . "' style='display: inline'>";
+                                        echo "<form method='post' action='" . URL_PATH . "/user/reservar" . "' style='display: inline'>";
                                         echo "<input type='hidden' name='book_id' value=" . $row['id'] . ">";
                                         echo "<button type='submit' class='btn btn-success'>";
                                         echo "Reservar";

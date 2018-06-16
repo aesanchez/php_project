@@ -45,6 +45,12 @@
             echo $photo;
         }
 
+        public function reservar(){
+            $this->opModel->newReservation($this->session->getID(), $_POST['book_id']);
+            header("Location: " . URL_PATH, true, 301);
+            exit();
+        }
+
         public function logout(){
             $this->session->log_out();
             header("Location: " . URL_PATH, true, 301);

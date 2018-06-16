@@ -40,6 +40,11 @@
             return $total;
         }
 
+        public function newReservation($user, $book){
+            $this->db->queryAdd("INSERT INTO operaciones (id, ultimo_estado, fecha_ultima_modificacion, lector_id, libros_id) 
+            VALUES (NULL, 'RESERVADO', CURRENT_DATE(), '$user', '$book');");
+        }
+
         public function getListForAdmin(){
             return $this->db->query("
             SELECT l.titulo, a.nombre as a_nombre, a.apellido as a_apellido, u.nombre as u_nombre, u.apellido as u_apellido, o.ultimo_estado, o.fecha_ultima_modificacion 
