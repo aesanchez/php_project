@@ -10,17 +10,31 @@
                 exit();
             }
             $this->userModel = $this->model('UserModel');
+            $this->opModel = $this->model('OperationModel');
+            $this->bookModel = $this->model('BookModel');
+            $this->authorModel = $this->model('AuthorModel');
         }
 
         public function index(){
             //mostrar al usuario que esta logueado en el momento
             $id = $this->session->getID();
             $user = $this->userModel->getUser($id);
+
+            //operaciones
+            $ops = $this->opModel->getOperationsByUser($id);
+            foreach ($ops as &$row) {
+                //agregar titulo y autor
+                $book = $this->bookModel->getBook($row['libros_id']);
+                $row['author_id'] = $book['autores_id'];
+                $row['author_name'] = $this->authorModel->getName($book['autores_id']);
+                $row['title'] = $book['titulo'];
+            }
             $params = [
                 'id' => $id,
                 'name' => $user['nombre'],
                 'lastname' => $user['apellido'],
-                'email' => $user['email']
+                'email' => $user['email'],
+                'table' => $ops
             ];
             $this->view('user', $params);             
         }

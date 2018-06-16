@@ -38,10 +38,10 @@
                     </div>
                     <div class="card-body">
                         <div class=row>
-                        <div class="col-4" style="text-align: center; ">
-                            <img src="<?php echo URL_PATH;?>/user/photo/<?php echo $params['id']?>" style="width: 80%; height: auto;margin: auto; border-radius: 25%; border: 3px solid grey"/>
+                        <div class="col-2" style="text-align: center; ">
+                            <img src="<?php echo URL_PATH;?>/user/photo/<?php echo $params['id']?>" style="width: 100%; height: auto;margin: auto; border-radius: 25%; border: 3px solid grey"/>
                         </div>
-                            <div class='col-8'>
+                            <div class='col-10'>
                                 <table class="table">
                                     <tbody>
                                         <tr>
@@ -72,6 +72,7 @@
         <!-- Operaciones-->
         <div class="row">
             <div class="col">
+                <h3 class="text-center">Historial de operaciones</h3>
                 <table class="table table-bordered">
                     <thead class="thead-dark">
                         <tr>
@@ -84,18 +85,15 @@
                     </thead>
                     <tbody>
                         <?php
-                            // foreach($params['books'] as $row){
-                            //     echo "<tr>";
-                            //     echo "<td><a href=\"" . URL_PATH . "/book/display/" . $row["id"] . "\"><img src=\"" . URL_PATH . "/book/photo/" . $row["id"] . "\" style='height: 10em'></a></td>";
-                            //     echo "<td><a href=\"" . URL_PATH . "/book/display/" . $row["id"] . "\">" . $row["titulo"] ."</a></td>";
-                            //     echo "<td><a href=\"" . URL_PATH . "/author/display/" . $row["autores_id"] . "\">" . $row["nombre_autor"] ."</a></td>";
-                            //     echo "<td>";
-                            //     echo "Total: " . $row['cantidad'] . "</br>";
-                            //     echo "Prestados: " . $row['prestados'] . "</br>";
-                            //     echo "Reservados: " . $row['reservados'] . "</br>";
-                            //     echo "</td>";
-                            //     echo "</tr>";
-                            // }
+                            foreach($params['table'] as $row){
+                                echo "<tr>";
+                                echo "<td><a href=\"" . URL_PATH . "/book/display/" . $row["libros_id"] . "\"><img src=\"" . URL_PATH . "/book/photo/" . $row["libros_id"] . "\" style='height: 10em'></a></td>";
+                                echo "<td><a href=\"" . URL_PATH . "/book/display/" . $row["libros_id"] . "\">" . $row["title"] ."</a></td>";
+                                echo "<td><a href=\"" . URL_PATH . "/author/display/" . $row["author_id"] . "\">" . $row["author_name"] ."</a></td>";
+                                echo "<td>" . $row['ultimo_estado'] . "</td>";
+                                echo "<td>" . $row['fecha_ultima_modificacion'] . "</td>";
+                                echo "</tr>";
+                            }
                         ?>
                     </tbody>
                 </table>              

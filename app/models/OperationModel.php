@@ -25,5 +25,9 @@
             return $stateTotals;
         }
 
+        public function getOperationsByUser($id){
+            return $this->db->query("SELECT ultimo_estado, fecha_ultima_modificacion, libros_id FROM operaciones WHERE lector_id=$id");
+        }
+
     }
 ?>
