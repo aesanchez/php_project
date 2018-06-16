@@ -26,6 +26,8 @@ class DataBase{
 
     public function query($query){
         $result = mysqli_query($this->connection, $query);
+        if($result == false)//si no se pudo hacer la consulta
+            return NULL;
         //devuelve arreglo de filas
         return mysqli_fetch_all($result,MYSQLI_ASSOC);
     }

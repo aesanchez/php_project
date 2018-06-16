@@ -41,10 +41,38 @@
             foreach ($books as &$row) {
                 $aux = $this->opModel->getStateTotalByBookID($row['id']);
                 $row['reservados'] = $aux['reservado'];
-                $row['prestados'] = $aux['prestado'];    
+                $row['prestados'] = $aux['prestado'];  
             }
+
             //pages total
-            $pageTotal = ceil($this->bookModel->getTotal($authorFilter, $titleFilter, $this->pageAmount) / $this->pageAmount); 
+            $pageTotal = ceil($this->bookModel->getTotal($authorFilter, $titleFilter, $this->pageAmount) / $this->pageAmount);
+
+            //info de sesion
+            $userInfo = $this->sessionInfo();
+
+            //flag de boton reservar
+            if($userInfo['logged']){ //si hay alguien logueado
+                $skip = false;
+                if($this->opModel->totalActiveOperations($userInfo['id']) > 2){ //y no alcanzo el maximo
+                    $skip = true;
+                }
+                //agregar columna de si se puede reservar o no
+                foreach ($books as &$row) {
+                    $puedo = false;
+                    //chequear si hay ejemplares libres
+                    if(!$skip){
+                        $aux = $this->opModel->getStateTotalByBookID($row['id']);
+                        if($row['cantidad'] > ($aux['reservado'] + $aux['prestado'])){
+                            //hay libres
+                            //chequear si no lo reserve ya
+                            if($this->opModel->isAvailable($row['id'], $userInfo['id'])){
+                                $puedo = true;
+                            }                                
+                        }
+                    }                       
+                    $row['reservar'] = $puedo;
+                }
+            }
 
             //paramentros para la vista
             $params = [
@@ -53,8 +81,9 @@
                 'title_filter' => $titleFilter,
                 'current_page' => $page_number,
                 'pages' => $pageTotal,
-                'userInfo' => $this->sessionInfo()
+                'userInfo' => $userInfo
             ];
+
             $this->view('index',$params);
         }
 

@@ -29,5 +29,22 @@
             return $this->db->query("SELECT ultimo_estado, fecha_ultima_modificacion, libros_id FROM operaciones WHERE lector_id=$id");
         }
 
+        public function totalActiveOperations($user_id){
+            $total = 0;
+            $result = $this->db->query("SELECT ultimo_estado FROM operaciones WHERE lector_id=$user_id");
+            foreach($result as $row){
+                if(strcmp($row['ultimo_estado'], "RESERVADO") == 0 || strcmp($row['ultimo_estado'], "PRESTADO") == 0){
+                    $total++;
+                }
+            }
+            return $total;
+        }
+
+        public function isAvailable($book_id, $user_id){
+            if(count($this->db->query("SELECT * FROM operaciones WHERE lector_id=$user_id AND libros_id=$book_id AND (ultimo_estado='RESERVADO' OR ultimo_estado='PRESTADO')")) == 0)//
+                return true;
+            return false;
+        }
+
     }
 ?>
