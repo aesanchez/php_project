@@ -41,6 +41,18 @@
 
             return $userInfo;
         }
+
+        public function prestar(){
+            $this->opModel->prestar($_POST['op_id']);
+            header("Location: " . URL_PATH . "/admin", true, 301);
+            exit();
+        }
+
+        public function devolver(){
+            $this->opModel->devolver($_POST['op_id']);
+            header("Location: " . URL_PATH . "/admin", true, 301);
+            exit();
+        }
     }
     
 ?>

@@ -26,7 +26,7 @@
         }
 
         public function getOperationsByUser($id){
-            return $this->db->query("SELECT ultimo_estado, fecha_ultima_modificacion, libros_id FROM operaciones WHERE lector_id=$id");
+            return $this->db->query("SELECT ultimo_estado, fecha_ultima_modificacion, libros_id FROM operaciones WHERE lector_id=$id ORDER BY ultimo_estado ASC");
         }
 
         public function totalActiveOperations($user_id){
@@ -45,9 +45,17 @@
             VALUES (NULL, 'RESERVADO', CURRENT_DATE(), '$user', '$book');");
         }
 
+        public function prestar($id){
+            $this->db->queryAdd("UPDATE operaciones SET ultimo_estado = 'PRESTADO', fecha_ultima_modificacion = CURRENT_DATE() WHERE operaciones.id = $id;");
+        }
+
+        public function devolver($id){
+            $this->db->queryAdd("UPDATE operaciones SET ultimo_estado = 'DEVUELTO', fecha_ultima_modificacion = CURRENT_DATE() WHERE operaciones.id = $id;");
+        }
+
         public function getListForAdmin(){
             return $this->db->query("
-            SELECT l.titulo, a.nombre as a_nombre, a.apellido as a_apellido, u.nombre as u_nombre, u.apellido as u_apellido, o.ultimo_estado, o.fecha_ultima_modificacion 
+            SELECT o.id, l.titulo, a.nombre as a_nombre, a.apellido as a_apellido, u.nombre as u_nombre, u.apellido as u_apellido, o.ultimo_estado, o.fecha_ultima_modificacion 
             FROM operaciones o INNER JOIN libros l ON o.libros_id = l.id 
             INNER JOIN usuarios u ON o.lector_id = u.id
             INNER JOIN autores a ON a.id = l.autores_id");

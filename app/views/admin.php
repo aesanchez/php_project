@@ -97,14 +97,14 @@
                                 echo "<td>" . $row['fecha_ultima_modificacion'] . "</td>";
                                 echo "<td>";
                                 if(strcmp($row['ultimo_estado'], "RESERVADO") == 0){
-                                    echo "<form method='get' action='" . URL_PATH . "" . "' style='display: inline'>";
-                                    echo "<input type='hidden' name='' value=" . "" . ">";
+                                    echo "<form method='post' action='" . URL_PATH . "/admin/prestar" . "' style='display: inline'>";
+                                    echo "<input type='hidden' name='op_id' value=" . $row['id'] . ">";
                                     echo "<button type='submit' class='btn btn-success'>";
                                     echo "Prestar";
                                     echo "</button></form>";
                                 }else if(strcmp($row['ultimo_estado'], "PRESTADO") == 0){
-                                    echo "<form method='get' action='" . URL_PATH . "" . "' style='display: inline'>";
-                                    echo "<input type='hidden' name='' value=" . "" . ">";
+                                    echo "<form method='post' action='" . URL_PATH . "/admin/devolver" . "' style='display: inline'>";
+                                    echo "<input type='hidden' name='op_id' value=" . $row['id'] . ">";
                                     echo "<button type='submit' class='btn btn-info'>";
                                     echo "Devolver";
                                     echo "</button></form>";
