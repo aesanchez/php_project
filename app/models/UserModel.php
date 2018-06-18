@@ -54,8 +54,8 @@
 
         public function validateUser($email, $password){
             if(!empty($this->db->query("SELECT nombre FROM usuarios WHERE email='$email' AND clave='$password'")))
-                return true;
-            return false;
+                return;
+            throw new Exception("Email o contrasenia incorrectos");
         }
 
     }

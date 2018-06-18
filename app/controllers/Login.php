@@ -18,18 +18,18 @@
             if(!empty($_POST)){
                 if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['password']) && !empty($_POST['password']) ){
                     //validar en la base de datos
-                    if($this->userModel->validateUser($_POST['email'], $_POST['password'])){
-                        //iniciar sesion
+                    try{
+                        $this->userModel->validateUser($_POST['email'], $_POST['password']);
                         $session = new Session;
                         $session->log_in($this->userModel->getID($_POST['email']));
                         //Se redireccion al index
                         header("Location: " . URL_PATH, true, 301);
                         exit();
-                    }else{
+                    }catch (Exception $e){
                         //Email o contrasenia incorrectos
                         $params = [
                             'authentication' => false
-                        ];               
+                        ];
                     }
                 }
             }
