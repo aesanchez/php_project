@@ -107,8 +107,9 @@
                                 echo "<td>" . $row['titulo'] . "</td>";
                                 echo "<td>" . $row['a_nombre'] . " " . $row['a_apellido'] ."</td>";
                                 echo "<td>" . $row['u_nombre'] . " " . $row['u_apellido'] ."</td>";
-                                echo "<td>" . $row['ultimo_estado'] . "</td>";
-                                echo "<td>" . $row['fecha_ultima_modificacion'] . "</td>";
+                                echo "<td>" . $row['ultimo_estado'] . "</td>";                                
+                                $date = date_create($row['fecha_ultima_modificacion']);
+                                echo "<td>" . date_format($date, 'd-m-Y') . "</td>";
                                 echo "<td>";
                                 if(strcmp($row['ultimo_estado'], "RESERVADO") == 0){
                                     echo "<form method='post' action='" . URL_PATH . "/admin/prestar" . "' style='display: inline'>";

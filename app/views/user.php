@@ -91,7 +91,8 @@
                                 echo "<td><a href=\"" . URL_PATH . "/book/display/" . $row["libros_id"] . "\">" . $row["title"] ."</a></td>";
                                 echo "<td><a href=\"" . URL_PATH . "/author/display/" . $row["author_id"] . "\">" . $row["author_name"] ."</a></td>";
                                 echo "<td>" . $row['ultimo_estado'] . "</td>";
-                                echo "<td>" . $row['fecha_ultima_modificacion'] . "</td>";
+                                $date = date_create($row['fecha_ultima_modificacion']);
+                                echo "<td>" . date_format($date, 'd-m-Y') . "</td>";
                                 echo "</tr>";
                             }
                         ?>
