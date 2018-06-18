@@ -31,16 +31,27 @@
                         <form action="<?php echo URL_PATH;?>/" method="post">
                             <div class="form-group">
                                 <label>Titulo</label>
-                                <input type="text" class="form-control" name="title" placeholder="Ingrese el titulo aqui...">
+                                <input type="text" class="form-control" name="title" placeholder="Ingrese el titulo aqui..."
+                                <?php
+                                    if(!is_null($params['title_filter']))
+                                        echo " value='$params[title_filter]'";
+                                ?>
+                                >
                             </div>
                             <div class="form-group">
                                 <label>Autor</label>
-                                <input type="text" class="form-control" name="author" placeholder="Ingrese el nombre del autor aqui...">
+                                <input type="text" class="form-control" name="author" placeholder="Ingrese el autor aqui..."
+                                <?php
+                                    if(!is_null($params['author_filter']))
+                                        echo " value='$params[author_filter]'";
+                                ?>
+                                >
                             </div>
                             <div align="right">
+                                <input type="button" class="btn btn-danger" value="Limpiar" onclick="location.href = '<?php echo URL_PATH?>';">
                                 <button type="submit" class="btn btn-primary">Buscar</button>
                             </div>
-                        </form>
+                        </form>                        
                     </div>
                 </div>
             </div>
@@ -50,16 +61,6 @@
         <div class="row">
             <div class="col">
                 <h2 class="text-center">Catalogo de libros</h2>
-                <?php
-                    if(!is_null($params['author_filter']) || !is_null($params['title_filter'])){
-                        echo "<p style='text-align: center'><small>Busqueda filtrada por:</small><br>";
-                        if(!is_null($params['title_filter']))
-                            echo "<small>Titulo: " . $params['title_filter'] . "</small><br>";
-                        if(!is_null($params['author_filter']))
-                            echo "<small>Autor: " . $params['author_filter'] . "</small><br>";                        
-                        echo "</p>";
-                    }
-                ?>
                 <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead class="thead-dark">

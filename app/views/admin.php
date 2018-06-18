@@ -31,25 +31,51 @@
                         <form action="<?php echo URL_PATH;?>/admin" method="post" name="search_form" onsubmit="return validateForm()">
                             <div class="form-group row">
                                 <label class="col-3">Titulo</label>
-                                <input type="text" class="form-control col-9" name="title" placeholder="Ingrese el titulo aqui...">
+                                <input type="text" class="form-control col-9" name="title" placeholder="Ingrese el titulo aqui..."
+                                <?php
+                                    if(!empty($params['filters']) && isset($params['filters']['title']))
+                                        echo " value='" . $params['filters']['title'] . "'";
+                                ?>
+                                >
                             </div>
                             <div class="form-group row">
                                 <label class="col-3">Autor</label>
-                                <input type="text" class="form-control col-9" name="author" placeholder="Ingrese el nombre del autor aqui...">
+                                <input type="text" class="form-control col-9" name="author" placeholder="Ingrese el nombre del autor aqui..."
+                                <?php
+                                    if(!empty($params['filters']) && isset($params['filters']['author']))
+                                        echo " value='" . $params['filters']['author'] . "'";
+                                ?>
+                                >
                             </div>
                             <div class="form-group row">
                                 <label class="col-3">Lector</label>
-                                <input type="text" class="form-control col-9" name="user" placeholder="Ingrese el lector aqui...">
+                                <input type="text" class="form-control col-9" name="user" placeholder="Ingrese el lector aqui..."
+                                <?php
+                                    if(!empty($params['filters']) && isset($params['filters']['user']))
+                                        echo " value='" . $params['filters']['user'] . "'";
+                                ?>
+                                >
                             </div>
                             <div class="form-group row">
                                 <label class="col-3">Fecha desde</label>
-                                <input type="date" class="form-control col-9" max=<?php echo date('Y-m-d');?> name="date_from">
+                                <input type="date" class="form-control col-9" max=<?php echo date('Y-m-d');?> name="date_from"
+                                <?php
+                                    if(!empty($params['filters']) && isset($params['filters']['date_from']))
+                                        echo " value='" . $params['filters']['date_from'] . "'";
+                                ?>
+                                >
                             </div>
                             <div class="form-group row">
                                 <label class="col-3">Fecha hasta</label>
-                                <input type="date" class="form-control col-9" max=<?php echo date('Y-m-d');?> name="date_until">
+                                <input type="date" class="form-control col-9" max=<?php echo date('Y-m-d');?> name="date_until"
+                                <?php
+                                    if(!empty($params['filters']) && isset($params['filters']['date_until']))
+                                        echo " value='" . $params['filters']['date_until'] . "'";
+                                ?>
+                                >
                             </div>
                             <div align="right">
+                                <input type="button" class="btn btn-danger" value="Limpiar" onclick="location.href = '<?php echo URL_PATH?>/admin';">
                                 <button type="submit" class="btn btn-primary">Buscar</button>
                             </div>
                         </form>
@@ -62,37 +88,6 @@
         <div class="row">
             <div class="col">
                 <h2 class="text-center">Operaciones</h2>
-                <?php
-                    //filtros
-                    if(!empty($params['filters'])){
-                        echo "
-                        <div class='row justify-content-center'>
-                            <div class='col-4'>
-                                <div class='alert alert-warning alert-dismisable fade show' role='alert'>
-                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                    <span aria-hidden='true'>&times;</span></button>
-                                    <strong>Busqueda filtrada por:</strong><br>
-                                    <p><small>";
-                                    
-                        if(isset($params['filters']['author']))
-                            echo "Autor: " . $params['filters']['author'] . "<br>";
-                        if(isset($params['filters']['title']))
-                            echo "Titulo: " . $params['filters']['title'] . "<br>";
-                        if(isset($params['filters']['user']))
-                            echo "Lector: " . $params['filters']['user'] . "<br>";     
-                        if(isset($params['filters']['date_from']))
-                            echo "Fecha desde: " . $params['filters']['date_from'] . "<br>";     
-                        if(isset($params['filters']['date_until']))
-                            echo "Fecha hasta: " . $params['filters']['date_until'] . "<br>";     
-                        echo "</p>";
-
-                        echo "
-                                </small></p>
-                                </div>
-                            </div>
-                        </div>";
-                    }
-                ?>
                 <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead class="thead-dark">
