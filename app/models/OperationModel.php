@@ -70,7 +70,8 @@
                     $query = $query . " AND o.fecha_ultima_modificacion >= '$filters[date_from]'";
                 if(isset($filters['date_until']))
                     $query = $query . " AND o.fecha_ultima_modificacion <= '$filters[date_until]'";
-            }  
+            }
+            $query = $query . " ORDER BY o.ultimo_estado ASC, o.fecha_ultima_modificacion";
             return $this->db->query($query);
         }
 

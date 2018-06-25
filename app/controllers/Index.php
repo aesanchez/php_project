@@ -52,26 +52,35 @@
 
             //flag de boton reservar
             if($userInfo['logged']){ //si hay alguien logueado
-                $skip = false;
-                if($this->opModel->totalActiveOperations($userInfo['id']) > 2){ //y no alcanzo el maximo
-                    $skip = true;
+                $max = false;
+                if($this->opModel->totalActiveOperations($userInfo['id']) > 2){
+                    //alcanzo el maximo
+                    $max = true;
                 }
                 //agregar columna de si se puede reservar o no
                 foreach ($books as &$row) {
-                    $puedo = false;
-                    //chequear si hay ejemplares libres
-                    if(!$skip){
+                    if(!$max){
+                        //chequear si hay ejemplares libres
                         $aux = $this->opModel->getStateTotalByBookID($row['id']);
                         if($row['cantidad'] > ($aux['reservado'] + $aux['prestado'])){
                             //hay libres
                             //chequear si no lo reserve ya
                             if($this->opModel->isAvailable($row['id'], $userInfo['id'])){
-                                $puedo = true;
-                            }                                
+                                //puedo reservar
+                                $row['user_op'] = "AVAILABLE";
+                            }else{
+                                //la lo reserve o lo tengo
+                                $row['user_op'] = "GOT_IT";
+                            }                               
+                        }else{
+                            //no hay mas
+                            $row['user_op'] = "NONE_LEFT";
                         }
-                    }                       
-                    $row['reservar'] = $puedo;
-                }
+                    }else{
+                        //ya alcanze el max
+                        $row['user_op'] = "MAX";
+                    }
+                }     
             }
 
             //paramentros para la vista

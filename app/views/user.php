@@ -90,7 +90,15 @@
                                 echo "<td><a href=\"" . URL_PATH . "/book/display/" . $row["libros_id"] . "\"><img src=\"" . URL_PATH . "/book/photo/" . $row["libros_id"] . "\" style='height: 10em'></a></td>";
                                 echo "<td><a href=\"" . URL_PATH . "/book/display/" . $row["libros_id"] . "\">" . $row["title"] ."</a></td>";
                                 echo "<td><a href=\"" . URL_PATH . "/author/display/" . $row["author_id"] . "\">" . $row["author_name"] ."</a></td>";
-                                echo "<td>" . $row['ultimo_estado'] . "</td>";
+                                echo "<td>";
+                                if(strcmp($row['ultimo_estado'], "PRESTADO") == 0){
+                                    echo "<p class='text-success'>" . $row['ultimo_estado'] . "</p>";
+                                }else if(strcmp($row['ultimo_estado'], "RESERVADO") == 0){
+                                    echo "<p class='text-info'>" . $row['ultimo_estado'] . "</p>";
+                                }else{
+                                    echo $row['ultimo_estado'];
+                                }
+                                echo "</td>";
                                 $date = date_create($row['fecha_ultima_modificacion']);
                                 echo "<td>" . date_format($date, 'd-m-Y') . "</td>";
                                 echo "</tr>";

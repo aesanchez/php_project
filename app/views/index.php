@@ -61,6 +61,21 @@
         <div class="row">
             <div class="col">
                 <h2 class="text-center">Catalogo de libros</h2>
+                <?php
+                    if($params['userInfo']['logged'] && !$params['userInfo']['admin'] && strcmp($params['books'][0]['user_op'], "MAX") == 0){
+                ?>
+                <div class='d-flex justify-content-center'>
+                <div class="alert alert-warning alert-dismissible fade show col-6" role="alert">
+                    <strong>Atencion!</strong> Ya se alcanzo el maximo(3) de reservas.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                </div>
+
+                <?php
+                }
+                ?>
                 <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead class="thead-dark">
@@ -69,7 +84,7 @@
                             <th scope="col">Titulo</th>
                             <th scope="col">Autor</th>
                             <th scope="col">Ejemplares</th>
-                            <?php if($params['userInfo']['logged'] && !$params['userInfo']['admin']){?>
+                            <?php if($params['userInfo']['logged'] && !$params['userInfo']['admin'] && strcmp($params['books'][0]['user_op'], "MAX") != 0){?>
                             <th scope="col">Accion</th>
                             <?php } ?>
                         </tr>
@@ -88,15 +103,24 @@
                                 echo "Reservados: " . $row['reservados'] . "</br>";
                                 echo "</td>";
                                 if($params['userInfo']['logged'] && !$params['userInfo']['admin']){
-                                    echo "<td>";
-                                    if($row['reservar']){//puedo reservar
+                                    
+                                    if(strcmp($row['user_op'], "AVAILABLE") == 0){
+                                        echo "<td>";
                                         echo "<form method='post' action='" . URL_PATH . "/user/reservar" . "' style='display: inline'>";
                                         echo "<input type='hidden' name='book_id' value=" . $row['id'] . ">";
                                         echo "<button type='submit' class='btn btn-success'>";
                                         echo "Reservar";
                                         echo "</button></form>";
-                                    }
-                                    echo "</td>";
+                                        echo "</td>";
+                                    }else if(strcmp($row['user_op'], "GOT_IT") == 0){
+                                        echo "<td class='text-warning'>";
+                                        echo "Ya posee un<br>ejemplar en tramite";
+                                        echo "</td>";
+                                    }else if(strcmp($row['user_op'], "NONE_LEFT") == 0){
+                                        echo "<td class='text-danger'>";
+                                        echo "No hay<br>ejemplares disponibles";
+                                        echo "</td>";
+                                    } 
                                 }
                                 echo "</tr>";
                             }
