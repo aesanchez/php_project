@@ -52,9 +52,11 @@
             return $row['foto'];
         }
 
-        public function validateUser($email, $password){
-            if(!empty($this->db->query("SELECT nombre FROM usuarios WHERE email='$email' AND clave='$password'")))
-                return;
+        public function getUserID($email, $password){
+            $result = $this->db->query("SELECT id FROM usuarios WHERE email='$email' AND clave='$password'");
+            if(!empty($result)){
+                return $result[0]['id'];
+            }
             throw new Exception("Email o contrasenia incorrectos");
         }
 

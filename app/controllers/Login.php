@@ -19,9 +19,9 @@
                 if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['password']) && !empty($_POST['password']) ){
                     //validar en la base de datos
                     try{
-                        $this->userModel->validateUser($_POST['email'], $_POST['password']);
+                        $user_id = $this->userModel->getUserID($_POST['email'], $_POST['password']);
                         $session = new Session;
-                        $session->log_in($this->userModel->getID($_POST['email']));
+                        $session->log_in($user_id);
                         //Se redireccion al index
                         header("Location: " . URL_PATH, true, 301);
                         exit();
