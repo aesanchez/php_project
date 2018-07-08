@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 
 <head>
     <meta charset="utf-8">
@@ -25,7 +25,10 @@
                             <?php echo $params['title']?>
                         </h2>
                         <div class="mb-0 text-muted">Autor: <?php echo $params['author']?></div>
-                        <div class="mb-2 text-muted">Cantidad: <?php echo $params['amount']?></div>
+                        <div class="mb-0 text-muted">Total: <?php echo $params['amount']?></div>
+                        <div class="mb-0 text-muted">Disponibles: <?php echo ($params['amount'] - $params['reservations']['reservado'] - $params['reservations']['prestado'])?></div>
+                        <div class="mb-0 text-muted">Prestados: <?php echo ($params['reservations'])['prestado']?></div>
+                        <div class="mb-2 text-muted">Reservados: <?php echo ($params['reservations'])['reservado']?></div>
                         <h5 class="mb-2">
                             Descripcion
                         </h5>

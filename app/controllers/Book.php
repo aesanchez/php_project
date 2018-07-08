@@ -5,6 +5,7 @@
         public function __construct(){
             $this->bookModel = $this->model('BookModel');
             $this->authorModel = $this->model('AuthorModel');
+            $this->opModel = $this->model('OperationModel');
         }
 
         public function display($id){
@@ -14,6 +15,7 @@
                 'author' => $this->authorModel->getName($aux['autores_id']),
                 'description' => $aux['descripcion'],
                 'amount' => $aux['cantidad'],
+                'reservations' => $this->opModel->getStateTotalByBookID($id),
                 'book_id' => $aux['id'],
                 'userInfo' => $this->sessionInfo()
             ];
