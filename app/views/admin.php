@@ -88,6 +88,20 @@
         <div class="row">
             <div class="col">
                 <h2 class="text-center">Operaciones</h2>
+                <?php
+                    if(isset($params['lastOp'])){
+                ?>
+                <div class='d-flex justify-content-center'>
+                <div class="alert alert-success alert-dismissible fade show col-6" role="alert">
+                    <strong>Exito</strong> al realizar la operacion.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                </div>
+                <?php
+                }
+                ?>
                 <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead class="thead-dark">

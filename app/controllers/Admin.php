@@ -31,12 +31,13 @@
                 $filters['date_until'] = $_POST['date_until'];
             }
 
-
             $params = [
                 'userInfo' => $this->sessionInfo(),
                 'list' => $this->opModel->getListForAdmin($filters),
-                'filters' => $filters
+                'filters' => $filters,
             ];
+            if(isset($this->lastOp))
+                $params['lastOp'] = $this->lastOp;
 
             $this->view('admin', $params);             
         }
@@ -62,14 +63,14 @@
 
         public function prestar(){
             $this->opModel->prestar($_POST['op_id']);
-            header("Location: " . URL_PATH . "/admin", true, 301);
-            exit();
+            $this->lastOp = true;
+            $this->index();
         }
 
         public function devolver(){
             $this->opModel->devolver($_POST['op_id']);
-            header("Location: " . URL_PATH . "/admin", true, 301);
-            exit();
+            $this->lastOp = true;
+            $this->index();
         }
     }
     
