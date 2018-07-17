@@ -31,14 +31,18 @@
     </nav>
 
     <div class="container">
-        <?php
-            if(isset($params['authentication'])){
-                echo "<div class='row'><div class='col'><div class='alert alert-danger alert-dismisable fade show' role='alert'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                <span aria-hidden='true'>&times;</span></button>
-                <strong>ERROR!</strong> <p> Email o contrasenia incorrectos </p></div></div></div>";
-            }
-        ?>
+        <?php if(isset($params['authentication'])){ ?>
+            <div class='row'>
+                <div class='col'>
+                    <div class='alert alert-danger alert-dismisable fade show' role='alert'>
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                        </button>
+                        <strong>ERROR!</strong><p> Email o contrasenia incorrectos </p>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
         <!-- Registro-->
         <div class="row justify-content-center">
             <div class="col col-lg-8 col-md-8">

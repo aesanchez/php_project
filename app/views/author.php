@@ -27,23 +27,28 @@
                             <th scope="col">Portada</th>
                             <th scope="col">Titulo</th>
                             <th scope="col">Ejemplares</th>
-                            <?php
-                                foreach($params['books'] as $row){
-                                    echo "<tr>";
-                                    echo "<td><a href=\"" . URL_PATH . "/book/display/" . $row["id"] . "\"><img src=\"" . URL_PATH . "/book/photo/" . $row["id"] . "\" style='height: 10em'></a></td>";
-                                    echo "<td><a href=\"" . URL_PATH . "/book/display/" . $row["id"] . "\">" . $row["titulo"] ."</a></td>";
-                                    echo "<td>";
-                                    echo "Total: " . $row['cantidad'] . "</br>";
-                                    echo "Prestados: " . $row['prestados'] . "</br>";
-                                    echo "Reservados: " . $row['reservados'] . "</br>";
-                                    echo "</td>";
-                                    echo "</tr>";
-                                }
-                            ?>
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        <?php foreach($params['books'] as $row){?>
+                            <tr>
+                                <td>
+                                    <a href="<?php echo URL_PATH . "/book/display/" . $row["id"]?>">
+                                        <img src="<?php echo URL_PATH . "/book/photo/" . $row["id"]?>" style='height: 10em'>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="<?php echo URL_PATH?>/book/display/<?php echo $row["id"]?>">
+                                        <?php echo $row["titulo"]?>
+                                    </a>
+                                </td>
+                                <td>
+                                    Total: <?php echo $row['cantidad']?></br>
+                                    Prestados: <?php echo $row['prestados']?></br>
+                                    Reservados: <?php echo $row['reservados'] ?></br>
+                                </td>
+                            </tr>
+                        <?php }?>
                     </tbody>
                 </table>
             </div>

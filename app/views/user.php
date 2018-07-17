@@ -84,26 +84,42 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                            foreach($params['table'] as $row){
-                                echo "<tr>";
-                                echo "<td><a href=\"" . URL_PATH . "/book/display/" . $row["libros_id"] . "\"><img src=\"" . URL_PATH . "/book/photo/" . $row["libros_id"] . "\" style='height: 10em'></a></td>";
-                                echo "<td><a href=\"" . URL_PATH . "/book/display/" . $row["libros_id"] . "\">" . $row["title"] ."</a></td>";
-                                echo "<td><a href=\"" . URL_PATH . "/author/display/" . $row["author_id"] . "\">" . $row["author_name"] ."</a></td>";
-                                echo "<td>";
-                                if(strcmp($row['ultimo_estado'], "PRESTADO") == 0){
-                                    echo "<p class='text-success'>" . $row['ultimo_estado'] . "</p>";
-                                }else if(strcmp($row['ultimo_estado'], "RESERVADO") == 0){
-                                    echo "<p class='text-info'>" . $row['ultimo_estado'] . "</p>";
-                                }else{
-                                    echo $row['ultimo_estado'];
-                                }
-                                echo "</td>";
-                                $date = date_create($row['fecha_ultima_modificacion']);
-                                echo "<td>" . date_format($date, 'd-m-Y') . "</td>";
-                                echo "</tr>";
-                            }
-                        ?>
+                        <?php foreach($params['table'] as $row){?>
+                            <tr>
+                                <td>
+                                    <a href="<?php echo URL_PATH . "/book/display/" . $row["libros_id"]?>">
+                                        <img src="<?php echo URL_PATH . "/book/photo/" . $row["libros_id"]?>" style='height: 10em'>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="<?php echo URL_PATH . "/book/display/" . $row["libros_id"]?>">
+                                        <?php echo $row["title"]?>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="<?php echo URL_PATH . "/author/display/" . $row["author_id"]?>">
+                                        <?php echo $row["author_name"]?>
+                                    </a>
+                                </td>
+                                <td>
+                                    <?php if(strcmp($row['ultimo_estado'], "PRESTADO") == 0){?>
+                                        <p class='text-success'>
+                                            <?php echo $row['ultimo_estado']?>
+                                        </p>
+                                    <?php }else if(strcmp($row['ultimo_estado'], "RESERVADO") == 0){?>
+                                        <p class='text-info'>
+                                            <?php echo $row['ultimo_estado']?> 
+                                        </p>
+                                    <?php }else{
+                                        echo $row['ultimo_estado'];
+                                    }?>
+                                </td>                            
+                                <td>
+                                    <?php $date = date_create($row['fecha_ultima_modificacion']);?>
+                                    <?php echo date_format($date, 'd-m-Y');?>
+                                </td>
+                            </tr>
+                        <?php }?>
                     </tbody>
                 </table>              
             </div>

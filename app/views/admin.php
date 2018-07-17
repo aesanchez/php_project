@@ -115,33 +115,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                            foreach($params['list'] as $row){
-                                echo "<tr>";
-                                echo "<td>" . $row['titulo'] . "</td>";
-                                echo "<td>" . $row['a_nombre'] . " " . $row['a_apellido'] ."</td>";
-                                echo "<td>" . $row['u_nombre'] . " " . $row['u_apellido'] ."</td>";
-                                echo "<td>" . $row['ultimo_estado'] . "</td>";                                
-                                $date = date_create($row['fecha_ultima_modificacion']);
-                                echo "<td>" . date_format($date, 'd-m-Y') . "</td>";
-                                echo "<td>";
-                                if(strcmp($row['ultimo_estado'], "RESERVADO") == 0){
-                                    echo "<form method='post' action='" . URL_PATH . "/admin/prestar" . "' style='display: inline'>";
-                                    echo "<input type='hidden' name='op_id' value=" . $row['id'] . ">";
-                                    echo "<button type='submit' class='btn btn-success'>";
-                                    echo "Prestar";
-                                    echo "</button></form>";
-                                }else if(strcmp($row['ultimo_estado'], "PRESTADO") == 0){
-                                    echo "<form method='post' action='" . URL_PATH . "/admin/devolver" . "' style='display: inline'>";
-                                    echo "<input type='hidden' name='op_id' value=" . $row['id'] . ">";
-                                    echo "<button type='submit' class='btn btn-info'>";
-                                    echo "Devolver";
-                                    echo "</button></form>";
-                                }
-                                echo "</td>";
-                                echo "</tr>";
-                            }
-                        ?>
+                        <?php foreach($params['list'] as $row){ ?>
+                            <tr>
+                                <td>
+                                    <?php echo $row['titulo']?>
+                                </td>
+                                <td>
+                                    <?php echo $row['a_nombre'] . " " . $row['a_apellido']?>
+                                </td>
+                                <td>
+                                    <?php echo $row['u_nombre'] . " " . $row['u_apellido']?>
+                                </td>
+                                <td>
+                                    <?php echo $row['ultimo_estado']?>
+                                </td>                                
+                                <?php $date = date_create($row['fecha_ultima_modificacion'])?>
+                                <td>
+                                    <?php echo date_format($date, 'd-m-Y')?>
+                                </td>
+                                <td>
+                                    <?php if(strcmp($row['ultimo_estado'], "RESERVADO") == 0){?>
+                                        <form method='post' action='<?php echo URL_PATH?>/admin/prestar' style='display: inline'>
+                                        <input type='hidden' name='op_id' value=<?php echo $row['id']?>>
+                                        <button type='submit' class='btn btn-success'>
+                                        Prestar
+                                        </button></form>
+                                    <?php }else if(strcmp($row['ultimo_estado'], "PRESTADO") == 0){?>
+                                        <form method='post' action='<?php echo URL_PATH?>/admin/devolver' style='display: inline'>
+                                        <input type='hidden' name='op_id' value=<?php echo $row['id']?>>
+                                        <button type='submit' class='btn btn-info'>
+                                        Devolver
+                                        </button></form>
+                                    <?php } ?>
+                                </td>
+                            </tr>
+                        <?php }?>
                     </tbody>
                 </table>
                 </div>               

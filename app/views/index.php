@@ -90,47 +90,56 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                            foreach($params['books'] as $row){
-                                echo "<tr>";
-                                echo "<td><a href=\"" . URL_PATH . "/book/display/" . $row["id"] . "\"><img src=\"" . URL_PATH . "/book/photo/" . $row["id"] . "\" style='height: 10em'></a></td>";
-                                echo "<td><a href=\"" . URL_PATH . "/book/display/" . $row["id"] . "\">" . $row["titulo"] ."</a></td>";
-                                echo "<td><a href=\"" . URL_PATH . "/author/display/" . $row["autores_id"] . "\">" . $row["nombre_autor"] ."</a></td>";
-                                echo "<td>";
-                                echo "Total: " . $row['cantidad'] . "</br>";
-                                echo "Disponibles: " . ($row['cantidad'] - $row['prestados'] - $row['reservados']) . "</br>";
-                                echo "Prestados: " . $row['prestados'] . "</br>";
-                                echo "Reservados: " . $row['reservados'] . "</br>";
-                                echo "</td>";
-                                if($params['userInfo']['logged'] && !$params['userInfo']['admin']){
-                                    
-                                    if(strcmp($row['user_op'], "AVAILABLE") == 0){
-                                        echo "<td>";
-                                        echo "<form method='post' action='" . URL_PATH . "/user/reservar" . "' style='display: inline'>";
-                                        echo "<input type='hidden' name='book_id' value=" . $row['id'] . ">";
-                                        echo "<button type='submit' class='btn btn-success'>";
-                                        echo "Reservar";
-                                        echo "</button></form>";
-                                        echo "</td>";
-                                    }else if(strcmp($row['user_op'], "GOT_IT") == 0){
-                                        echo "<td class='text-warning'>";
-                                        echo "Ya posee un<br>ejemplar en tramite";
-                                        echo "</td>";
-                                    }else if(strcmp($row['user_op'], "NONE_LEFT") == 0){
-                                        echo "<td class='text-danger'>";
-                                        echo "No hay<br>ejemplares disponibles";
-                                        echo "</td>";
-                                    } 
-                                }
-                                echo "</tr>";
-                            }
-                        ?>
+                        <?php foreach($params['books'] as $row){?>
+                            <tr>
+                                <td>
+                                    <a href="<?php echo URL_PATH . "/book/display/" . $row["id"]?>">
+                                        <img src="<?php echo URL_PATH . "/book/photo/" . $row["id"]?>" style='height: 10em'>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="<?php echo URL_PATH . "/book/display/" . $row["id"]?>">
+                                        <?php echo $row["titulo"]?>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="<?php echo URL_PATH . "/author/display/" . $row["autores_id"]?>">
+                                        <?php echo $row["nombre_autor"]?>
+                                    </a>
+                                </td>
+                                <td>
+                                    Total: <?php echo $row['cantidad']?></br>
+                                    Disponibles: <?php echo ($row['cantidad'] - $row['prestados'] - $row['reservados'])?></br>
+                                    Prestados: <?php echo $row['prestados']?></br>
+                                    Reservados: <?php echo $row['reservados']?></br>
+                                </td>
+                                <?php if($params['userInfo']['logged'] && !$params['userInfo']['admin']){
+                                    if(strcmp($row['user_op'], "AVAILABLE") == 0){?>
+                                        <td>
+                                            <form method='post' action="<?php echo URL_PATH . "/user/reservar"?>" style='display: inline'>
+                                            <input type='hidden' name='book_id' value=<?php echo $row['id']?>>
+                                            <button type='submit' class='btn btn-success'>
+                                                Reservar
+                                            </button></form>
+                                        </td>
+                                    <?php }else if(strcmp($row['user_op'], "GOT_IT") == 0){?>
+                                        <td class='text-warning'>
+                                            Ya posee un<br>ejemplar en tramite
+                                        </td>
+                                    <?php }else if(strcmp($row['user_op'], "NONE_LEFT") == 0){?>
+                                        <td class='text-danger'>
+                                                No hay<br>ejemplares disponibles
+                                        </td>
+                                    <?php }?> 
+                                <?php }?>
+                            </tr>
+                        <?php }?>
                     </tbody>
                 </table>
                 </div>
                 <div class="text-center">
+                <!-- Paginacion -->
                     <?php
-                        //paginacion
                         $aux = 0;
                         while($aux < $params['pages']){
                             if($aux+1 == $params['current_page']){

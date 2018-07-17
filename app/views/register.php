@@ -32,29 +32,37 @@
 
     <div class="container">
         <!-- Registro-->
-        <?php
-
-            //veredicto
-            if(isset($params['ok'])){
-                //se logro agregarlo a la base de datos
-                echo "<div class='row'><div class='col'><div class='alert alert-success alert-dismisable fade show' role='alert'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                <span aria-hidden='true'>&times;</span></button>
-                <strong>Todo OK!</strong> Lograste registrarte a esta super pagina</div></div></div>";
-            }else if(isset($params['errores']) && !empty($params['errores'])){
-                //imprimer errors
-                echo "<div class='row'><div class='col'><div class='alert alert-danger alert-dismisable fade show' role='alert'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                <span aria-hidden='true'>&times;</span></button>
-                <strong>ERROR!</strong> <p>";
-
-                foreach($params['errores'] as $e){
-                    echo $e . "<br>";
-                }
-                
-                echo "</p></div></div></div>";
-            }
-        ?>
+        <!-- Veredicto -->
+        <?php if(isset($params['ok'])){?>
+            <!-- se logro agregarlo a la base de datos -->
+            <div class='row'>
+                <div class='col'>
+                    <div class='alert alert-success alert-dismisable fade show' role='alert'>
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                        </button>
+                        <strong>Todo OK!</strong> Lograste registrarte a esta super pagina
+                    </div>
+                </div>
+            </div>
+        <?php }else if(isset($params['errores']) && !empty($params['errores'])){?>
+                <!-- imprimer errors -->
+                <div class='row'>
+                    <div class='col'>
+                        <div class='alert alert-danger alert-dismisable fade show' role='alert'>
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                            <strong>ERROR!</strong>
+                            <p>
+                                <?php foreach($params['errores'] as $e){
+                                    echo $e . "<br>";
+                                }?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+        <?php }?>
         <div class="row">
             <div class="col">
                 <div class="card">
